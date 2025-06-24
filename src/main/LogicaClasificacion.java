@@ -75,17 +75,20 @@ public class LogicaClasificacion {
         Stack<Integer> temporal = new Stack<>();
         while(!pila.isEmpty()){
             int actual = pila.pop();
-        }
+            
             while (!temporal.isEmpty() && temporal.peek() > actual) {
                 pila.push(temporal.pop());
             }
             temporal.push(actual);
         }
+        
+        // Transferir los elementos ordenados de temporal a la lista
+        List<Integer> listaOrdenada = new ArrayList<>();
         while (!temporal.isEmpty()) {
-            pila.push(temporal.pop()); 
+            listaOrdenada.add(temporal.pop());
         }
 
-        return pila;
+        return listaOrdenada;
     }
 
     /**
@@ -99,22 +102,20 @@ public class LogicaClasificacion {
      *         Salida: [2, 4, 6, 1, 3, 5]
      */
     public List<Integer> clasificarPorParidad(LinkedList<Integer> original) {
-    
         LinkedList<Integer> pares = new LinkedList<>();
+        LinkedList<Integer> impares = new LinkedList<>();
 
         for (Integer numero : original) {
-           
             if (numero % 2 == 0) {
-                pares.add(numero); 
+                pares.add(numero);
             } else {
-                impares.add(numero); 
+                impares.add(numero);
             }
         }
+        
         List<Integer> resultado = new ArrayList<>();
-
         resultado.addAll(pares);
         resultado.addAll(impares);
         return resultado;
-    }
     }
 }
