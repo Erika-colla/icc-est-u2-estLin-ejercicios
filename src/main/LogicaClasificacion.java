@@ -15,7 +15,16 @@ public class LogicaClasificacion {
      *         Salida: "odnuM aloH"
      */
     public String invertirCadena(String texto) {
-        return "";
+        Stack<Character> pila = new Stack<>();
+        for (int i = 0; i < texto.length(); i++) {
+            char caracter = texto.charAt(i); 
+            pila.push(caracter);             
+        }
+        String cadenaInvertida = "";
+        while (!pila.isEmpty()) {
+            cadenaInvertida += pila.pop();
+        }
+        return cadenaInvertida;
     }
 
     /**
@@ -30,7 +39,27 @@ public class LogicaClasificacion {
      *         Salida: true
      */
     public boolean validarSimbolos(String expresion) {
-        return false;
+        Stack<Character> pila = new Stack<>();
+
+        for (int i = 0; i < expresion.length(); i++) {
+            char caracter = expresion.charAt(i);
+            if (caracter == '(' || caracter == '[' || caracter == '{') {
+                pila.push(caracter);
+            } else {
+                if (pila.isEmpty()) {
+                    return false;
+                }
+
+                char tope = pila.pop();
+                if ((caracter == ')' && tope != '(') ||
+                    (caracter == ']' && tope != '[') ||
+                    (caracter == '}' && tope != '{')) {
+                    return false;
+                }
+            }
+        }
+
+        return pila.isEmpty();
     }
 
     /**
@@ -43,8 +72,20 @@ public class LogicaClasificacion {
      *         Salida: [1, 2, 3, 4]
      */
     public List<Integer> ordenarPila(Stack<Integer> pila) {
+        Stack<Integer> temporal = new Stack<>();
+        while(!pila.isEmpty()){
+            int actual = pila.pop();
+        }
+            while (!temporal.isEmpty() && temporal.peek() > actual) {
+                pila.push(temporal.pop());
+            }
+            temporal.push(actual);
+        }
+        while (!temporal.isEmpty()) {
+            pila.push(temporal.pop()); 
+        }
 
-        return new ArrayList<>();
+        return pila;
     }
 
     /**
